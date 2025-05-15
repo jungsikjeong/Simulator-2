@@ -279,32 +279,35 @@ export default function CardSelectScene1({ onSceneChange }: SceneProps) {
                     )}
                 </AnimatePresence>
 
-                {/* 선택 버튼 (다시 고를래, 다 골랐어) */}
+                {/* 선택 버튼 */}
                 <AnimatePresence>
                     {showButtons && (
                         <motion.div
-                            className="absolute bottom-24 left-0 right-0 z-50 flex justify-center gap-4"
+                            className="absolute left-0 right-0 z-50 flex justify-center gap-18 md:gap-40"
+                            style={{
+                                bottom: isMobile ? '32px' : '52px'
+                            }}
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: 20 }}
                             transition={{ duration: 0.3 }}
                         >
                             <motion.button
-                                className="text-white font-bold flex items-center"
+                                className="text-white font-bold flex items-center text-lg text-bold"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={handleReselectCard}
                             >
-                                <span className="mr-1">&#8810;</span> 다시 고를래!
+                                <span className="mr-1">&lt;</span> 다시 고를래!
                             </motion.button>
 
                             <motion.button
-                                className="text-white font-bold flex items-center"
+                                className="text-white font-bold flex items-center text-lg text-bold"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={handleContinue}
                             >
-                                다 골랐어! <span className="ml-1">&#8811;</span>
+                                다 골랐어! <span className="ml-1">&gt;</span>
                             </motion.button>
                         </motion.div>
                     )}
