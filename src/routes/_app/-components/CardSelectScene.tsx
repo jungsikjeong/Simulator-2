@@ -16,11 +16,11 @@ export default function CardSelectScene1({ onSceneChange }: SceneProps) {
     const [isTypingComplete, setIsTypingComplete] = useState(false)
     const [isTouchable, setIsTouchable] = useState(true)
     const [showCards, setShowCards] = useState(false)
-    const [_cardsAnimationComplete, setCardsAnimationComplete] = useState(false)
+    const [_cardsAnimationComplete, _setCardsAnimationComplete] = useState(false)
     const [selectedCardId, setSelectedCardId] = useState<number | null>(null)
     const [isTransitioning, setIsTransitioning] = useState(false)
-    const [showSelectButton, setShowSelectButton] = useState(false)
     const [showCenteredCard, setShowCenteredCard] = useState(false)
+    const [showButtons, setShowButtons] = useState(false)
     const { data: currentMemberName } = useGetCurrentMemberName()
     const isMobile = useIsMobile()
 
@@ -86,13 +86,36 @@ export default function CardSelectScene1({ onSceneChange }: SceneProps) {
             setTimeout(() => {
                 setShowCards(false);
                 setShowCenteredCard(true);
-            }, 300);
 
-            // 카드 이동 애니메이션 후 다음 씬으로 이동
-            setTimeout(() => {
-                onSceneChange("cardSelect1");
-            }, 1500);
+                // 카드가 선택된 후 버튼 표시
+                setTimeout(() => {
+                    setShowButtons(true);
+                }, 500);
+            }, 300);
         }
+    };
+
+    // 다시 고르기 핸들러
+    const handleReselectCard = () => {
+        setShowButtons(false);
+        setShowCenteredCard(false);
+        setSelectedCardId(null);
+        setIsTransitioning(false);
+
+        // 잠시 후 카드 다시 표시
+        setTimeout(() => {
+            setShowCards(true);
+        }, 300);
+    };
+
+    // 계속 진행 핸들러
+    const handleContinue = () => {
+        setShowButtons(false);
+
+        // 다음 씬으로 이동
+        setTimeout(() => {
+            onSceneChange("cardSelect");
+        }, 500);
     };
 
     return (
@@ -239,6 +262,37 @@ export default function CardSelectScene1({ onSceneChange }: SceneProps) {
                                     className="w-full h-full object-cover rounded-lg shadow-lg"
                                 />
                             </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+
+                {/* 선택 버튼 (다시 고를래, 다 골랐어) */}
+                <AnimatePresence>
+                    {showButtons && (
+                        <motion.div
+                            className="absolute bottom-24 left-0 right-0 z-50 flex justify-center gap-4"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 20 }}
+                            transition={{ duration: 0.3 }}
+                        >
+                            <motion.button
+                                className="text-white font-bold flex items-center"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                onClick={handleReselectCard}
+                            >
+                                <span className="mr-1">&#8810;</span> 다시 고를래!
+                            </motion.button>
+
+                            <motion.button
+                                className="text-white font-bold flex items-center"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                onClick={handleContinue}
+                            >
+                                다 골랐어! <span className="ml-1">&#8811;</span>
+                            </motion.button>
                         </motion.div>
                     )}
                 </AnimatePresence>

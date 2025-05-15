@@ -2,8 +2,8 @@ import type { SceneKey } from '@/modules/scene-key.type'
 import StartScene1 from '@/routes/_app/-components/StartScene1'
 import StartScene2 from '@/routes/_app/-components/StartScene2'
 import WorryScene from '@/routes/_app/-components/WorryScene'
-import CardSelectScene1 from '@/routes/_app/-components/CardSelectScene1'
-import CardSelectScene2 from '@/routes/_app/-components/CardSelectScene2'
+import CardSelectScene1 from '@/routes/_app/-components/CardSelectScene'
+
 type SceneProps = {
   onSceneChange: (scene: SceneKey) => void
 }
@@ -15,6 +15,6 @@ export const SceneComponentMap: Record<SceneKey, SceneComponent> = {
   start1: StartScene1,
   start2: StartScene2,
   worry: WorryScene,
-  cardSelect1: CardSelectScene1,
-  cardSelect2: CardSelectScene2,
+  cardSelect: CardSelectScene1,
+
 }
