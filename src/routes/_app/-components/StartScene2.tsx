@@ -42,7 +42,7 @@ export default function StartScene2({
         createMember.mutate({ name: playerName, id: uuid })
       }
 
-      onSceneChange('part1')
+      onSceneChange('worry')
     } catch (error) {
       console.error('Failed to handle member:', error)
     }
@@ -153,7 +153,7 @@ export default function StartScene2({
 
         <motion.button
           onClick={handleNameSubmit}
-          className="bg-soft-blue text-white px-8 py-3 rounded-full shadow-lg hover:bg-soft-blue transition-all duration-300 font-bold tracking-wider"
+          className="bg-soft-blue text-white px-8 py-3 rounded-full shadow-lg hover:bg-soft-blue-hover transition-all duration-300 font-bold tracking-wider"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           disabled={!playerName.trim()}

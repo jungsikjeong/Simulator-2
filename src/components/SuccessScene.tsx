@@ -1,3 +1,4 @@
+//src/components/SuccessScene.tsx
 'use client'
 
 import DialogueBox from '@/components/DialogueBox'
@@ -5,7 +6,6 @@ import SceneLayout from '@/components/SceneLayout'
 import type { SceneKey } from '@/modules/scene-key.type'
 import { motion } from 'framer-motion'
 import type { SoundEffect } from '@/components/SceneLayout'
-import GlitterEffect from './GlitterEffect'
 
 // 얼굴 영역을 정의하는 인터페이스
 interface FaceArea {
@@ -26,7 +26,6 @@ type SuccessSceneProps = {
     setIsTypingComplete?: (isComplete: boolean) => void
     isTouchable?: boolean
     setIsTouchable?: (isTouchable: boolean) => void
-    showGlitter?: boolean
     faceArea?: FaceArea
 }
 
@@ -41,14 +40,10 @@ export default function SuccessScene({
     setIsTypingComplete,
     isTouchable = true,
     setIsTouchable,
-    showGlitter = false,
-    faceArea = { top: 8, left: 40, width: 20, height: 25 }, // 기본 얼굴 영역 좌표
 }: SuccessSceneProps) {
     return (
         <SceneLayout bg={bgImage} effect={effect} soundEffect={soundEffect as SoundEffect}>
             <div className="relative flex h-screen flex-col justify-end overflow-hidden bg-cover bg-center">
-                {/* 글리터 효과 (showGlitter가 true일 때만 보여짐) */}
-                {showGlitter && <GlitterEffect faceArea={faceArea} />}
 
                 {/* 대화 상자 */}
                 <motion.div

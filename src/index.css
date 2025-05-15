@@ -150,6 +150,10 @@
     background-color: #93BFFB;
   }
 
+  .hover\:bg-soft-blue-hover:hover {
+    background-color: #7eb3fd;
+  }
+
   .bg-soft-blue-80 {
     background-color: rgba(147, 191, 251, 0.3);
   }
