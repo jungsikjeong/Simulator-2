@@ -8,8 +8,7 @@
 /* start화면 제목 글씨체 */
 @font-face {
   font-family: 'Danjo-bold-Regular';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Danjo-bold-Regular.woff2')
-    format('woff2');
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Danjo-bold-Regular.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
 }
@@ -17,8 +16,7 @@
 /* # 파티1 글씨체*/
 @font-face {
   font-family: 'SBAggroB';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff')
-    format('woff');
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -26,8 +24,7 @@
 /* 네오동근 Pro 폰트 */
 @font-face {
   font-family: 'NeoDunggeunmoPro';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.woff2')
-    format('woff2');
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
 }
@@ -148,6 +145,29 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+@layer utilities {
+  .bg-soft-blue {
+    background-color: #93BFFB;
+  }
+
+  .bg-soft-blue-80 {
+    background-color: rgba(147, 191, 251, 0.3);
+  }
+
+  .border-soft-blue {
+    border-color: #93BFFB;
+  }
+
+  .text-soft-blue {
+    color: #93BFFB;
+  }
+
+  .focus\:ring-soft-blue:focus {
+    --tw-ring-color: #93BFFB;
+  }
+}
+
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -155,7 +175,8 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: var(--font-neo); /* 기본 폰트를 네오동근 Pro로 설정 */
+    font-family: var(--font-neo);
+    /* 기본 폰트를 네오동근 Pro로 설정 */
   }
 
   /* 내용 글씨체 */
@@ -164,6 +185,7 @@
   }
 
   @layer utilities {
+
     /* start화면 제목 글씨체 */
     .font-danjo {
       font-family: var(--font-danjo);
