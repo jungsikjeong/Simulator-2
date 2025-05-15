@@ -11,17 +11,13 @@ type FailSceneProps = {
     bgImage: string
     chunks: Array<{ content: string; className?: string }>
     nextScene: SceneKey
-    failMessage?: React.ReactNode
-    showFailMessage?: boolean
 }
 
-export default function FailScene({
+export default function SelectActionScene({
     onSceneChange,
     bgImage,
     chunks,
     nextScene,
-    failMessage = (<><div>아차차...</div><div>조금 더 분발해보자!!</div></>),
-    showFailMessage = true,
 }: FailSceneProps) {
     const [typingDone, setTypingDone] = useState(false)
     const [isTouchable, setIsTouchable] = useState(true)
@@ -33,9 +29,8 @@ export default function FailScene({
     }, [typingDone])
 
     return (
-        <SceneLayout bg={bgImage} effect="shake">
+        <SceneLayout bg={bgImage} effect="trueBlend">
             <div className="relative flex h-screen flex-col justify-end overflow-hidden pb-12">
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent pointer-events-none" />
 
                 <motion.div
                     initial={{ opacity: 0, y: 50, scale: 0.9 }}
@@ -67,18 +62,15 @@ export default function FailScene({
                             transition={{ delay: 0.3, duration: 0.5 }}
                             className="w-[90%] max-w-xl"
                         >
-                            <div className="w-full rounded-xl bg-white/80 px-5 py-5 shadow backdrop-blur-sm">
-                                {showFailMessage && <div className="mb-4 text-center text-gray-700 text-sm sm:text-base whitespace-pre-line">
-                                    {failMessage}
-                                </div>}
+                            <div className="w-full px-5 py-5">
 
                                 <motion.button
                                     onClick={() => onSceneChange(nextScene)}
                                     whileHover={{ scale: 1.03 }}
                                     whileTap={{ scale: 0.97 }}
-                                    className="bg-amber-500 text-white px-8 py-3 rounded-full shadow-lg hover:bg-amber-600 transition-all duration-300 font-bold tracking-wider"
+                                    className="bg-soft-blue text-white px-8 py-3 rounded-full shadow-lg hover:bg-soft-blue-hover transition-all duration-300 font-bold tracking-wider"
                                 >
-                                    <span className="font-medium">다시하기 &gt;&gt;</span>
+                                    <span className="font-medium">뒤집어보기 &gt;&gt;</span>
                                 </motion.button>
                             </div>
                         </motion.div>
