@@ -1,4 +1,4 @@
-import { StrictMode } from 'react';
+import { StrictMode, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { RouterProvider, createRouter } from '@tanstack/react-router';
@@ -14,6 +14,24 @@ declare module '@tanstack/react-router' {
   }
 }
 
+
+function AppWithTouchPrevention({ children }: { children: React.ReactNode }) {
+  useEffect(() => {
+    const preventDefault = (e: TouchEvent) => {
+      e.preventDefault();
+    };
+
+    // 모바일에서 스크롤 방지
+    document.addEventListener('touchmove', preventDefault, { passive: false });
+
+    return () => {
+      document.removeEventListener('touchmove', preventDefault);
+    };
+  }, []);
+
+  return <>{children}</>;
+}
+
 const queryClient = new QueryClient();
 
 const rootElement = document.getElementById('root')!;
@@ -22,8 +40,10 @@ if (!rootElement.innerHTML) {
   root.render(
     <StrictMode>
       <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-        <Toaster />
+        <AppWithTouchPrevention>
+          <RouterProvider router={router} />
+          <Toaster />
+        </AppWithTouchPrevention>
       </QueryClientProvider>
     </StrictMode>
   );
