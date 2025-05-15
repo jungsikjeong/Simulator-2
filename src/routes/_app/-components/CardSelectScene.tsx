@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import DialogueBox from '@/components/DialogueBox'
 import SceneLayout from '@/components/SceneLayout'
 import type { SceneKey } from '@/modules/scene-key.type'
-import { useGetCurrentMemberName } from '@/service/member/useGetMember'
+import { useGetCurrentMemberName, useUpdateMemberStatus, useGetCurrentMemberId } from '@/service/member/useGetMember'
 import { useIsMobile } from '@/hooks/use-mobile'
 
 type SceneProps = {
@@ -22,6 +22,8 @@ export default function CardSelectScene1({ onSceneChange }: SceneProps) {
     const [showCenteredCard, setShowCenteredCard] = useState(false)
     const [showButtons, setShowButtons] = useState(false)
     const { data: currentMemberName } = useGetCurrentMemberName()
+    const { data: currentMemberId } = useGetCurrentMemberId()
+    const updateMemberStatus = useUpdateMemberStatus()
     const isMobile = useIsMobile()
 
     useEffect(() => {
@@ -109,8 +111,19 @@ export default function CardSelectScene1({ onSceneChange }: SceneProps) {
     };
 
     // 계속 진행 핸들러
-    const handleContinue = () => {
+    const handleContinue = async () => {
         setShowButtons(false);
+
+        try {
+            if (currentMemberId) {
+                await updateMemberStatus.mutateAsync({
+                    id: currentMemberId,
+                    status: 'in_progress'
+                });
+            }
+        } catch (error) {
+            console.error('Failed to update member status:', error);
+        }
 
         // 다음 씬으로 이동
         setTimeout(() => {
