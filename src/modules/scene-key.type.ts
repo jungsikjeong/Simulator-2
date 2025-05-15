@@ -4,3 +4,4 @@ export type SceneKey =
   | 'worry'
   | 'cardSelect'
   | 'cardSelectAction'
+  | 'cardReveal'

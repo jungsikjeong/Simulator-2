@@ -3,8 +3,8 @@ import StartScene1 from '@/routes/_app/-components/StartScene1'
 import StartScene2 from '@/routes/_app/-components/StartScene2'
 import WorryScene from '@/routes/_app/-components/WorryScene'
 import CardSelectScene1 from '@/routes/_app/-components/CardSelectScene'
-import CardSelectAction from '@/routes/_app/-components/CardSelectAction'
-
+import CardSelectActionScene from '@/routes/_app/-components/CardSelectActionScene'
+import CardRevealScene from '@/routes/_app/-components/CardRevealScene'
 type SceneProps = {
   onSceneChange: (scene: SceneKey) => void
 }
@@ -17,5 +17,6 @@ export const SceneComponentMap: Record<SceneKey, SceneComponent> = {
   start2: StartScene2,
   worry: WorryScene,
   cardSelect: CardSelectScene1,
-  cardSelectAction: CardSelectAction,
+  cardSelectAction: CardSelectActionScene,
+  cardReveal: CardRevealScene,
 }

@@ -8,7 +8,7 @@ type SceneProps = {
     onSceneChange: (scene: SceneKey) => void
 }
 
-export default function CardSelectAction({ onSceneChange }: SceneProps) {
+export default function CardSelectActionScene({ onSceneChange }: SceneProps) {
     const { data: currentMemberName } = useGetCurrentMemberName()
 
     return (
@@ -21,7 +21,7 @@ export default function CardSelectAction({ onSceneChange }: SceneProps) {
                 { content: '부디 이 카드가 너의 해답이' },
                 { content: '되면 좋겠어!' },
             ]}
-            nextScene="cardSelect"
+            nextScene="cardReveal"
         />
     )
 }
