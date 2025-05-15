@@ -6,6 +6,7 @@ import DialogueBox from '@/components/DialogueBox'
 import SceneLayout from '@/components/SceneLayout'
 import type { SceneKey } from '@/modules/scene-key.type'
 import { useGetCurrentMemberName } from '@/service/member/useGetMember'
+import { useIsMobile } from '@/hooks/use-mobile'
 
 type SceneProps = {
     onSceneChange: (scene: SceneKey) => void
@@ -16,17 +17,12 @@ export default function CardSelectScene1({ onSceneChange }: SceneProps) {
     const [isTouchable, setIsTouchable] = useState(true)
     const [showCards, setShowCards] = useState(false)
     const [_cardsAnimationComplete, setCardsAnimationComplete] = useState(false)
+    const [selectedCardId, setSelectedCardId] = useState<number | null>(null)
+    const [isTransitioning, setIsTransitioning] = useState(false)
     const [showSelectButton, setShowSelectButton] = useState(false)
+    const [showCenteredCard, setShowCenteredCard] = useState(false)
     const { data: currentMemberName } = useGetCurrentMemberName()
-
-    const cards = Array.from({ length: 25 }, (_, index) => ({
-        id: index,
-        x: Math.random() * 60 - 30,
-        y: 30 + Math.random() * 20,
-        rotation: Math.random() * 10 - 5,
-        scale: 0.9 + Math.random() * 0.2,
-        delay: 0.02 * index
-    }));
+    const isMobile = useIsMobile()
 
     useEffect(() => {
         if (isTypingComplete) {
@@ -38,27 +34,65 @@ export default function CardSelectScene1({ onSceneChange }: SceneProps) {
         }
     }, [isTypingComplete]);
 
-    useEffect(() => {
-        if (showCards) {
-            // 마지막 카드 애니메이션이 완료되면 버튼을 표시
-            const lastCardDelay = Math.max(...cards.map(card => card.delay));
-            const totalAnimationTime = lastCardDelay + 0.6; // 0.6은 카드 애니메이션 duration
+    // Create responsive cards with two rows for both mobile and desktop
+    const cards = Array.from({ length: 25 }, (_, index) => {
+        // Split cards into two rows (13 and 12) for both mobile and desktop
+        const row = index < 13 ? 0 : 1;
+        const colCount = row === 0 ? 13 : 12;
+        const colIndex = row === 0 ? index : index - 13;
 
-            const timer = setTimeout(() => {
-                setCardsAnimationComplete(true);
+        // Adjust fan angles and radius based on mobile/desktop
+        const fanAngle = isMobile
+            ? (row === 0 ? 60 : 50) // Narrower angles for mobile
+            : (row === 0 ? 70 : 60); // Original angles for desktop
 
-                // 카드 애니메이션이 완료된 후 잠시 후에 버튼 표시
-                setTimeout(() => {
-                    setShowSelectButton(true);
-                }, 500);
-            }, (totalAnimationTime + 0.3) * 1000); // 단위를 초에서 밀리초로 변환
+        const startAngle = isMobile
+            ? (row === 0 ? 240 : 245) // Adjusted start angles for mobile
+            : (row === 0 ? 235 : 240); // Original start angles for desktop
 
-            return () => clearTimeout(timer);
+        const angle = startAngle + (fanAngle / (colCount - 1)) * colIndex;
+
+        const radius = isMobile
+            ? (row === 0 ? 200 : 270) // Smaller radii for mobile
+            : (row === 0 ? 280 : 380); // Original radii for desktop
+
+        // Position calculation
+        const radians = (angle * Math.PI) / 180;
+        const x = Math.cos(radians) * radius;
+        const y = Math.sin(radians) * radius + (
+            isMobile
+                ? (row === 0 ? 20 : -10) // Adjusted vertical position for mobile
+                : (row === 0 ? 50 : 10)  // Original vertical position for desktop
+        );
+
+        return {
+            id: index,
+            x: x,
+            y: y,
+            rotation: angle + 90, // Card rotates in fan direction but stands vertically with +90
+            scale: isMobile ? 0.7 : 0.9, // Smaller cards on mobile
+            delay: 0.02 * index,
+            row: row
+        };
+    });
+
+    // 카드 선택 핸들러
+    const handleCardSelect = (cardId: number) => {
+        if (selectedCardId === null && !isTransitioning) {
+            setSelectedCardId(cardId);
+            setIsTransitioning(true);
+
+            // 카드 배열 사라지고 중앙 카드 표시
+            setTimeout(() => {
+                setShowCards(false);
+                setShowCenteredCard(true);
+            }, 300);
+
+            // 카드 이동 애니메이션 후 다음 씬으로 이동
+            setTimeout(() => {
+                onSceneChange("cardSelect1");
+            }, 1500);
         }
-    }, [showCards, cards]);
-
-    const handleNavigateToNextScene = () => {
-        onSceneChange("cardSelect2");
     };
 
     return (
@@ -66,22 +100,21 @@ export default function CardSelectScene1({ onSceneChange }: SceneProps) {
             <div className="relative flex h-screen flex-col justify-end overflow-hidden bg-cover bg-center">
                 {/* 대화 상자 */}
                 <motion.div
-                    initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                    className="absolute bottom-20 left-0 right-0 z-10"
+                    initial={{ opacity: 0, y: 0 }}
                     animate={{
                         opacity: 1,
-                        y: isTypingComplete ? -150 : 0,
-                        scale: 1
+                        y: isTypingComplete ? (isMobile ? -180 : -280) : 0
                     }}
                     transition={{
                         duration: 0.8,
                         ease: 'easeOut',
                         y: {
+                            delay: isTypingComplete ? 0.2 : 0,
                             type: 'spring',
                             damping: 15,
-                            stiffness: 100,
-                            delay: isTypingComplete ? 0 : 0
-                        },
-                        scale: { type: 'spring', damping: 20, stiffness: 100 },
+                            stiffness: 100
+                        }
                     }}
                 >
                     <DialogueBox
@@ -94,7 +127,7 @@ export default function CardSelectScene1({ onSceneChange }: SceneProps) {
                         ]}
                         typingDelay={0.5}
                         variant="light"
-                        className="mb-20 cursor-pointer px-0 py-6 transition-transform duration-200"
+                        className="mb-4 cursor-pointer px-0 py-6 transition-transform duration-200"
                         typingTextClassName="text-base sm:text-xl leading-relaxed"
                         isTouchable={isTouchable}
                         setIsTouchable={setIsTouchable}
@@ -104,38 +137,47 @@ export default function CardSelectScene1({ onSceneChange }: SceneProps) {
                     />
                 </motion.div>
 
-                {/* 카드덱 */}
-                <AnimatePresence>
-                    {showCards && (
-                        <motion.div
-                            className="absolute bottom-[-90px] left-0 right-0 flex justify-center items-center"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.5 }}
-                        >
-                            <div className="relative h-72 w-full max-w-md">
+                {/* 카드 부채꼴 배열 */}
+                <div className="flex-grow flex items-center justify-center">
+                    <AnimatePresence>
+                        {showCards && (
+                            <motion.div
+                                className="relative w-full h-full flex items-center justify-center"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.3 }}
+                                style={{
+                                    marginBottom: isMobile ? '-800px' : '-1100px'
+                                }}
+                            >
                                 {cards.map((card) => (
                                     <motion.div
                                         key={card.id}
                                         className="absolute cursor-pointer"
                                         style={{
-                                            width: '80px',
-                                            height: '120px',
-                                            left: 'calc(50% - 40px)'
+                                            width: isMobile ? '45px' : '60px',
+                                            height: isMobile ? '68px' : '90px',
+                                            zIndex: 1
                                         }}
                                         initial={{
-                                            y: 200,
-                                            x: card.x,
-                                            rotate: card.rotation * 5,
-                                            scale: card.scale * 0.5,
+                                            x: 0,
+                                            y: 0,
+                                            rotate: 0,
+                                            scale: 0,
                                             opacity: 0
                                         }}
                                         animate={{
-                                            y: card.id % 5 * 2,
-                                            x: (card.id % 5 - 2) * 16,
+                                            x: card.x,
+                                            y: card.y,
                                             rotate: card.rotation,
                                             scale: card.scale,
                                             opacity: 1
+                                        }}
+                                        exit={{
+                                            opacity: 0,
+                                            scale: 0,
+                                            transition: { duration: 0.2 }
                                         }}
                                         transition={{
                                             type: 'spring',
@@ -145,11 +187,12 @@ export default function CardSelectScene1({ onSceneChange }: SceneProps) {
                                             duration: 0.6
                                         }}
                                         whileHover={{
-                                            y: -10,
-                                            scale: card.scale * 1.1,
+                                            y: card.y - (isMobile ? 15 : 20),
+                                            scale: card.scale * 1.15,
+                                            zIndex: 5,
                                             transition: { duration: 0.2 }
                                         }}
-                                        onClick={handleNavigateToNextScene}
+                                        onClick={() => handleCardSelect(card.id)}
                                     >
                                         <img
                                             src="/card/card_back.png"
@@ -158,27 +201,44 @@ export default function CardSelectScene1({ onSceneChange }: SceneProps) {
                                         />
                                     </motion.div>
                                 ))}
-                            </div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </div>
 
-                            {/* 카드 고르기 버튼 */}
-                            <AnimatePresence>
-                                {showSelectButton && (
-                                    <motion.button
-                                        className="absolute bottom-30 text-white font-bold flex items-center"
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: 20 }}
-                                        transition={{ duration: 0.4, ease: "easeOut" }}
-                                        onClick={handleNavigateToNextScene}
-                                        whileHover={{
-                                            scale: 1.05,
-                                        }}
-                                        whileTap={{ scale: 0.95 }}
-                                    >
-                                        카드 고르기 &gt;&gt;
-                                    </motion.button>
-                                )}
-                            </AnimatePresence>
+                {/* 선택 후 중앙에 표시될 카드 */}
+                <AnimatePresence>
+                    {showCenteredCard && (
+                        <motion.div
+                            className="absolute flex items-center justify-center"
+                            style={{
+                                top: '50%',
+                                width: '100%',
+                                height: '100%',
+                                marginTop: isMobile ? '-150px' : '-200px', // 모바일에서 위치 조정
+                                transform: 'translate(-50%, -50%)',
+                                zIndex: 50
+                            }}
+                            initial={{ opacity: 0, scale: 0.5 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{
+                                type: 'spring',
+                                damping: 15,
+                                stiffness: 80,
+                                duration: 0.5
+                            }}
+                        >
+                            <div className="relative" style={{
+                                width: isMobile ? '90px' : '120px',  // 모바일에서 더 작은 선택된 카드
+                                height: isMobile ? '135px' : '180px'
+                            }}>
+                                <img
+                                    src="/card/card_back.png"
+                                    alt="Selected Card"
+                                    className="w-full h-full object-cover rounded-lg shadow-lg"
+                                />
+                            </div>
                         </motion.div>
                     )}
                 </AnimatePresence>
