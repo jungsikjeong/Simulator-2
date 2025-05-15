@@ -181,6 +181,12 @@
     @apply bg-background text-foreground;
     font-family: var(--font-neo);
     /* 기본 폰트를 네오동근 Pro로 설정 */
+    overscroll-behavior: none;
+    touch-action: none;
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
   }
 
   /* 내용 글씨체 */
