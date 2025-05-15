@@ -57,9 +57,8 @@ export default function CardSelectScene1({ onSceneChange }: SceneProps) {
         }
     }, [showCards, cards]);
 
-    // Function to handle navigation to next scene
     const handleNavigateToNextScene = () => {
-        onSceneChange("worry");
+        onSceneChange("cardSelect2");
     };
 
     return (

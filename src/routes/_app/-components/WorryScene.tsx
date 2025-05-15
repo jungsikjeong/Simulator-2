@@ -30,7 +30,7 @@ export default function WorryScene({ onSceneChange }: SceneProps) {
                     content: '고민거리에 집중을 해바',
                 },
             ]}
-            nextScene="cardSelect"
+            nextScene="cardSelect1"
             isTypingComplete={isTypingComplete}
             setIsTypingComplete={setIsTypingComplete}
             isTouchable={isTouchable}
