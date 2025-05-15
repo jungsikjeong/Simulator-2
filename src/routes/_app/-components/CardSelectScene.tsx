@@ -174,7 +174,7 @@ export default function CardSelectScene1({ onSceneChange }: SceneProps) {
                 </motion.div>
 
                 {/* 카드 부채꼴 배열 */}
-                <div className="flex-grow flex items-center justify-center">
+                <div className="flex-grow flex items-center justify-center md:mb-44">
                     <AnimatePresence>
                         {showCards && (
                             <motion.div
@@ -246,7 +246,7 @@ export default function CardSelectScene1({ onSceneChange }: SceneProps) {
                 <AnimatePresence>
                     {showCenteredCard && (
                         <motion.div
-                            className="absolute flex items-center justify-center"
+                            className="absolute flex items-center justify-center "
                             style={{
                                 top: '50%',
                                 width: '100%',
