@@ -114,7 +114,7 @@ export default function CardSelectScene1({ onSceneChange }: SceneProps) {
 
         // 다음 씬으로 이동
         setTimeout(() => {
-            onSceneChange("cardSelect");
+            onSceneChange("worry");
         }, 500);
     };
 
