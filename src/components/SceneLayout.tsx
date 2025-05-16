@@ -192,30 +192,32 @@ export default function SceneLayout({
     const { initial, animate, exit } = variantMap[effect]
 
     return (
-        <AnimatePresence mode="sync">
-            <motion.div
-                key={`${bg}-${effect}`}
-                className="relative h-screen w-full overflow-hidden bg-cover bg-center"
-                style={{
-                    backgroundImage: `url(${bg})`,
-                    aspectRatio: '9/16',
-                    maxWidth: '100vw',
-                    maxHeight: '100vh',
-                    margin: '0 auto'
-                }}
-                initial={initial as TargetAndTransition}
-                animate={animate as TargetAndTransition}
-                exit={exit as TargetAndTransition}
-            >
-                {!hideTitle && (
-                    <img
-                        src="/logo.png"
-                        alt="Greatest Marketer of Jim Beam"
-                        className="absolute top-2 right-4 w-20 z-50"
-                    />
-                )}
-                {children}
-            </motion.div>
-        </AnimatePresence>
+        <div className="fixed inset-0 flex items-center justify-center bg-black">
+            <AnimatePresence mode="sync">
+                <motion.div
+                    key={`${bg}-${effect}`}
+                    className="relative w-full h-full overflow-hidden bg-cover bg-center"
+                    style={{
+                        backgroundImage: `url(${bg})`,
+                        aspectRatio: '9/16',
+                        width: 'min(100vw, 56.25vh)', // 9/16 비율
+                        height: 'min(177.78vw, 100vh)', // 16/9 비율
+                        margin: '0 auto'
+                    }}
+                    initial={initial as TargetAndTransition}
+                    animate={animate as TargetAndTransition}
+                    exit={exit as TargetAndTransition}
+                >
+                    {!hideTitle && (
+                        <img
+                            src="/logo.png"
+                            alt="Greatest Marketer of Jim Beam"
+                            className="absolute top-2 right-4 w-20 z-50"
+                        />
+                    )}
+                    {children}
+                </motion.div>
+            </AnimatePresence>
+        </div>
     )
 }
