@@ -137,15 +137,15 @@ export default function CardSelectScene1({ onSceneChange }: SceneProps) {
                 {/* 대화 상자 */}
                 <motion.div
                     className="absolute bottom-20 left-0 right-0 z-10"
-                    initial={{ opacity: 0, y: 0 }}
+                    initial={{ opacity: 0, top: 'auto' }}
                     animate={{
                         opacity: 1,
-                        y: isTypingComplete ? (isMobile ? -180 : -280) : 0
+                        top: isTypingComplete ? (isMobile ? '5%' : '5%') : 'auto'
                     }}
                     transition={{
                         duration: 0.8,
                         ease: 'easeOut',
-                        y: {
+                        top: {
                             delay: isTypingComplete ? 0.2 : 0,
                             type: 'spring',
                             damping: 15,
@@ -157,7 +157,6 @@ export default function CardSelectScene1({ onSceneChange }: SceneProps) {
                         chunks={[
                             { content: `[${currentMemberName}]!\n` },
                             { content: '고민거리를 생각했다면\n' },
-                            { content: '\n' },
                             { content: '이제 이 수 많은 카드중에\n' },
                             { content: '마음에 드는 카드를 골라봐' },
                         ]}
