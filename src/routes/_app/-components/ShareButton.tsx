@@ -29,7 +29,8 @@ export default function ShareButton({ currentMemberName, selectedCard, title }: 
             return imagePath
         }
         // 상대 경로인 경우 baseUrl과 결합
-        return `${baseUrl}${imagePath}`
+        // return `${baseUrl}${imagePath}`
+        return `${baseUrl}/card/22.png`
     }
 
     useEffect(() => {
