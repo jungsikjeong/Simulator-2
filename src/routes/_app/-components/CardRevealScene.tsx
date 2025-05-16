@@ -19,6 +19,7 @@ export default function CardRevealScene({ onSceneChange }: CardRevealSceneProps)
     const startY = useRef(0)
     const isMobile = useIsMobile()
 
+    // ㅇㅇ
     // 카드 리스트
     const cardList = [
         '/card/card1.png',
