@@ -67,7 +67,7 @@ export default function ShareButton({ currentMemberName, selectedCard, title }: 
             transition={{ duration: 0.5, delay: 2 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-white hover:bg-gray-100 hover:text-white text-soft-blue border border-soft-blue px-8 md:px-10 py-2 md:py-3 rounded-full shadow-lg transition-colors duration-300 flex items-center space-x-2 text-sm md:text-base w-full max-w-[200px] justify-center"
+            className="bg-white hover:bg-gray-100 text-soft-blue border border-soft-blue px-8 md:px-10 py-2 md:py-3 rounded-full shadow-lg transition-colors duration-300 flex items-center space-x-2 text-sm md:text-base w-full max-w-[200px] justify-center"
         >
             <Share2 size={18} />
             <span className="font-medium">{title}</span>
