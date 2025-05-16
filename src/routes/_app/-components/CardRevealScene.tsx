@@ -3,8 +3,8 @@
 import type { SceneKey } from '@/modules/scene-key.type'
 import { useGetCurrentMemberName } from '@/service/member/useGetMember'
 import { motion } from 'framer-motion'
-import { Share2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import ShareButton from './ShareButton'
 
 type CardRevealSceneProps = {
     onSceneChange: (scene: SceneKey) => void
@@ -122,20 +122,7 @@ export default function CardRevealScene({ onSceneChange }: CardRevealSceneProps)
                         <span className="font-medium">다음으로 &gt;</span>
                     </motion.button>
 
-                    <motion.button
-                        onClick={() => {
-
-                        }}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 2 }}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="bg-white hover:bg-gray-50 text-soft-blue border border-soft-blue px-8 md:px-10 py-2 md:py-3 rounded-full shadow-lg transition-colors duration-300 flex items-center space-x-2 text-sm md:text-base w-full max-w-[200px] justify-center"
-                    >
-                        <Share2 size={18} />
-                        <span className="font-medium">공유하기</span>
-                    </motion.button>
+                    <ShareButton currentMemberName={currentMemberName} selectedCard={selectedCard} title='공유하기' />
                 </div>
             </div>
         </div>
