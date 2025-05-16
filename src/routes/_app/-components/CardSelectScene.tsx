@@ -133,7 +133,7 @@ export default function CardSelectScene1({ onSceneChange }: SceneProps) {
 
     // 다이얼로그 박스의 초기 위치와 최종 위치 (퍼센트)
     const dialogInitialBottom = '15%';
-    const dialogFinalBottom = isMobile ? '70%' : '76%';
+    const dialogFinalBottom = isMobile ? '70%' : '70%';
 
     return (
         <SceneLayout bg="/박정민_3.png" effect="trueBlend">
@@ -188,7 +188,7 @@ export default function CardSelectScene1({ onSceneChange }: SceneProps) {
                                 exit={{ opacity: 0 }}
                                 transition={{ duration: 0.3 }}
                                 style={{
-                                    bottom: isMobile ? '-62%' : '-58%' // 화면 하단에서의 퍼센트 위치
+                                    bottom: isMobile ? '-62%' : '-62%' // 화면 하단에서의 퍼센트 위치
                                 }}
                             >
                                 {cards.map((card) => (
