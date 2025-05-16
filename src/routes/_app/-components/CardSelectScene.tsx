@@ -137,7 +137,7 @@ export default function CardSelectScene1({ onSceneChange }: SceneProps) {
 
     return (
         <SceneLayout bg="/박정민_3.png" effect="trueBlend">
-            <div className="relative flex h-screen flex-col justify-end overflow-hidden bg-cover bg-center">
+            <div className="relative flex h-full flex-col justify-end overflow-hidden bg-cover bg-center">
                 {/* 대화 상자 */}
                 <motion.div
                     className="absolute left-0 right-0 z-10"

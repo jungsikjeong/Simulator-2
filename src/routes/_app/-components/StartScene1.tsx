@@ -13,7 +13,7 @@ export default function StartScene({
   return (
     <SceneLayout bg="/박정민_1.png" effect="trueBlend" hideTitle={true}>
       {/* Background overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-gray-500/30 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 h-full bg-gradient-to-t from-gray-500/30 to-transparent pointer-events-none" />
 
       {/* Scene transition overlay */}
       {/* <div id="scene-transition" className="absolute inset-0 bg-black opacity-0 transition-opacity duration-800 pointer-events-none z-50" /> */}
