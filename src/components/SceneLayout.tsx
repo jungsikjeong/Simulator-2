@@ -196,7 +196,13 @@ export default function SceneLayout({
             <motion.div
                 key={`${bg}-${effect}`}
                 className="relative h-screen w-full overflow-hidden bg-cover bg-center"
-                style={{ backgroundImage: `url(${bg})` }}
+                style={{
+                    backgroundImage: `url(${bg})`,
+                    aspectRatio: '9/16',
+                    maxWidth: '100vw',
+                    maxHeight: '100vh',
+                    margin: '0 auto'
+                }}
                 initial={initial as TargetAndTransition}
                 animate={animate as TargetAndTransition}
                 exit={exit as TargetAndTransition}
