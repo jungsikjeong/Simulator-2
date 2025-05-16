@@ -7,6 +7,7 @@ import type { SceneKey } from '@/modules/scene-key.type'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { useGetCurrentMemberName } from '@/service/member/useGetMember'
+import { useUpdateMemberStatus, useGetCurrentMemberId } from '@/service/member/useGetMember'
 
 type SceneProps = {
     onSceneChange: (scene: SceneKey) => void
@@ -16,6 +17,8 @@ export default function ReplayScene({ onSceneChange }: SceneProps) {
     const [choiceOpen, setChoiceOpen] = useState(false)
     const [isTouchable, setIsTouchable] = useState(true)
     const { data: currentMemberName } = useGetCurrentMemberName()
+    const { data: currentMemberId } = useGetCurrentMemberId()
+    const { mutate: updateMemberStatus } = useUpdateMemberStatus()
 
     return (
         <SceneLayout bg="/박정민_5.png" effect="trueBlend">
@@ -70,6 +73,10 @@ export default function ReplayScene({ onSceneChange }: SceneProps) {
                         switch (k) {
                             case 'cardSelect':
                                 onSceneChange('cardSelect')
+                                updateMemberStatus({
+                                    id: currentMemberId,
+                                    status: 'completed'
+                                })
                                 break
                             case 'ending':
                                 onSceneChange('ending')
