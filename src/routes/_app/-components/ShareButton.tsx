@@ -19,16 +19,27 @@ export default function ShareButton({ currentMemberName, selectedCard, title }: 
         if (import.meta.env.DEV) {
             return 'http://localhost:3000'
         }
-        return import.meta.env.VITE_APP_URL || window.location.origin // 배포 환경 URL
+        return import.meta.env.VITE_APP_URL || window.location.origin
     }
-    console.log('getBaseUrl:', getBaseUrl)
 
     useEffect(() => {
-        if (typeof window !== 'undefined' && window.Kakao) {
-            if (!window.Kakao.isInitialized()) {
+        const loadKakaoSDK = () => {
+            if (typeof window !== 'undefined' && !window.Kakao) {
+                const script = document.createElement('script')
+                script.src = 'https://developers.kakao.com/sdk/js/kakao.js'
+                script.async = true
+                script.onload = () => {
+                    if (window.Kakao && !window.Kakao.isInitialized()) {
+                        window.Kakao.init(import.meta.env.VITE_KAKAO_APP_KEY)
+                    }
+                }
+                document.head.appendChild(script)
+            } else if (window.Kakao && !window.Kakao.isInitialized()) {
                 window.Kakao.init(import.meta.env.VITE_KAKAO_APP_KEY)
             }
         }
+
+        loadKakaoSDK()
     }, [])
 
     const shareToKakao = () => {
@@ -55,6 +66,8 @@ export default function ShareButton({ currentMemberName, selectedCard, title }: 
                     },
                 ],
             })
+        } else {
+            console.error('Kakao SDK가 로드되지 않았습니다.')
         }
     }
 
