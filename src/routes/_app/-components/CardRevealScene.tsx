@@ -1,9 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import { useGetCurrentMemberName } from '@/service/member/useGetMember'
 import type { SceneKey } from '@/modules/scene-key.type'
+import { useGetCurrentMemberName } from '@/service/member/useGetMember'
+import { motion } from 'framer-motion'
+import { Share2 } from 'lucide-react'
+import { useEffect, useState } from 'react'
 
 type CardRevealSceneProps = {
     onSceneChange: (scene: SceneKey) => void
@@ -108,17 +109,34 @@ export default function CardRevealScene({ onSceneChange }: CardRevealSceneProps)
                 </motion.div>
 
                 {/* 다음으로 버튼 */}
-                <motion.button
-                    onClick={() => onSceneChange('replay')}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 1.8 }}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="bg-soft-blue hover:bg-soft-blue-hover text-white px-8 md:px-10 py-2 md:py-3 rounded-full shadow-lg transition-colors duration-300 flex items-center space-x-2 text-sm md:text-base"
-                >
-                    <span className="font-medium">다음으로 &gt;</span>
-                </motion.button>
+                <div className="flex flex-col gap-3 w-full items-center">
+                    <motion.button
+                        onClick={() => onSceneChange('replay')}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 1.8 }}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="bg-soft-blue hover:bg-soft-blue-hover text-white px-8 md:px-10 py-2 md:py-3 rounded-full shadow-lg transition-colors duration-300 flex items-center space-x-2 text-sm md:text-base w-full max-w-[200px] justify-center"
+                    >
+                        <span className="font-medium">다음으로 &gt;</span>
+                    </motion.button>
+
+                    <motion.button
+                        onClick={() => {
+
+                        }}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 2 }}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="bg-white hover:bg-gray-50 text-soft-blue border border-soft-blue px-8 md:px-10 py-2 md:py-3 rounded-full shadow-lg transition-colors duration-300 flex items-center space-x-2 text-sm md:text-base w-full max-w-[200px] justify-center"
+                    >
+                        <Share2 size={18} />
+                        <span className="font-medium">공유하기</span>
+                    </motion.button>
+                </div>
             </div>
         </div>
     )
