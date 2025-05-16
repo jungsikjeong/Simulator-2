@@ -193,31 +193,38 @@ export default function SceneLayout({
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black">
-            <AnimatePresence mode="sync">
-                <motion.div
-                    key={`${bg}-${effect}`}
-                    className="relative w-full h-full overflow-hidden bg-cover bg-center"
-                    style={{
-                        backgroundImage: `url(${bg})`,
-                        aspectRatio: '9/16',
-                        width: 'min(100vw, 56.25vh)', // 9/16 비율
-                        height: 'min(177.78vw, 100vh)', // 16/9 비율
-                        margin: '0 auto'
-                    }}
-                    initial={initial as TargetAndTransition}
-                    animate={animate as TargetAndTransition}
-                    exit={exit as TargetAndTransition}
-                >
-                    {!hideTitle && (
-                        <img
-                            src="/logo.png"
-                            alt="Greatest Marketer of Jim Beam"
-                            className="absolute top-2 right-4 w-20 z-50"
-                        />
-                    )}
-                    {children}
-                </motion.div>
-            </AnimatePresence>
+            <div
+                className="relative"
+                style={{
+                    width: 'min(100vw, 56.25vh)', // 9:16 비율
+                    height: 'min(177.78vw, 100vh)', // 16/9 비율
+                    aspectRatio: '9/16',
+                    background: '#222',
+                    overflow: 'hidden',
+                }}
+            >
+                <AnimatePresence mode="sync">
+                    <motion.div
+                        key={`${bg}-${effect}`}
+                        className="relative w-full h-full overflow-hidden bg-cover bg-center"
+                        style={{
+                            backgroundImage: `url(${bg})`,
+                        }}
+                        initial={initial as TargetAndTransition}
+                        animate={animate as TargetAndTransition}
+                        exit={exit as TargetAndTransition}
+                    >
+                        {!hideTitle && (
+                            <img
+                                src="/logo.png"
+                                alt="Greatest Marketer of Jim Beam"
+                                className="absolute top-2 right-4 w-20 z-50"
+                            />
+                        )}
+                        {children}
+                    </motion.div>
+                </AnimatePresence>
+            </div>
         </div>
     )
 }
