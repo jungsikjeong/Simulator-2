@@ -133,6 +133,7 @@ export default function SceneLayout({
             '/박정민_3.png',
             '/박정민_4.png',
             '/박정민_5.png',
+            '/박정민_6.png',
             '/card/card_back.png',
         ]
         bgUrls.forEach((src) => {
