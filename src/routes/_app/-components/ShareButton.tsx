@@ -22,6 +22,16 @@ export default function ShareButton({ currentMemberName, selectedCard, title }: 
         return import.meta.env.VITE_APP_URL || window.location.origin
     }
 
+    const getFullImageUrl = (imagePath: string) => {
+        const baseUrl = getBaseUrl()
+        // 이미 절대 URL인 경우 그대로 반환
+        if (imagePath.startsWith('http')) {
+            return imagePath
+        }
+        // 상대 경로인 경우 baseUrl과 결합
+        return `${baseUrl}${imagePath}`
+    }
+
     useEffect(() => {
         const loadKakaoSDK = () => {
             if (typeof window !== 'undefined' && !window.Kakao) {
@@ -45,12 +55,15 @@ export default function ShareButton({ currentMemberName, selectedCard, title }: 
     const shareToKakao = () => {
         if (typeof window !== 'undefined' && window.Kakao) {
             const baseUrl = getBaseUrl()
+            const fullImageUrl = getFullImageUrl(selectedCard)
+            console.log('공유할 이미지 URL:', fullImageUrl) // 디버깅용
+
             window.Kakao.Link.sendDefault({
                 objectType: 'feed',
                 content: {
                     title: `${currentMemberName}의 인생 해답 카드`,
                     description: '나의 인생 해답 카드를 확인해보세요!',
-                    imageUrl: selectedCard,
+                    imageUrl: fullImageUrl,
                     link: {
                         mobileWebUrl: baseUrl,
                         webUrl: baseUrl,
