@@ -131,21 +131,25 @@ export default function CardSelectScene1({ onSceneChange }: SceneProps) {
         }, 500);
     };
 
+    // 다이얼로그 박스의 초기 위치와 최종 위치 (퍼센트)
+    const dialogInitialBottom = '15%';
+    const dialogFinalBottom = isMobile ? '70%' : '76%';
+
     return (
         <SceneLayout bg="/박정민_3.png" effect="trueBlend">
             <div className="relative flex h-screen flex-col justify-end overflow-hidden bg-cover bg-center">
                 {/* 대화 상자 */}
                 <motion.div
-                    className="absolute bottom-20 left-0 right-0 z-10"
-                    initial={{ opacity: 0, top: 'auto' }}
+                    className="absolute left-0 right-0 z-10"
+                    initial={{ opacity: 0, bottom: dialogInitialBottom }}
                     animate={{
                         opacity: 1,
-                        top: isTypingComplete ? (isMobile ? '5%' : '5%') : 'auto'
+                        bottom: isTypingComplete ? dialogFinalBottom : dialogInitialBottom
                     }}
                     transition={{
                         duration: 0.8,
                         ease: 'easeOut',
-                        top: {
+                        bottom: {
                             delay: isTypingComplete ? 0.2 : 0,
                             type: 'spring',
                             damping: 15,
@@ -157,6 +161,7 @@ export default function CardSelectScene1({ onSceneChange }: SceneProps) {
                         chunks={[
                             { content: `[${currentMemberName}]!\n` },
                             { content: '고민거리를 생각했다면\n' },
+
                             { content: '이제 이 수 많은 카드중에\n' },
                             { content: '마음에 드는 카드를 골라봐' },
                         ]}
@@ -173,17 +178,17 @@ export default function CardSelectScene1({ onSceneChange }: SceneProps) {
                 </motion.div>
 
                 {/* 카드 부채꼴 배열 */}
-                <div className="flex-grow flex items-center justify-center md:mb-44">
+                <div className="flex-grow flex items-center justify-center">
                     <AnimatePresence>
                         {showCards && (
                             <motion.div
-                                className="relative w-full h-full flex items-center justify-center"
+                                className="absolute w-full h-full flex items-center justify-center"
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
                                 transition={{ duration: 0.3 }}
                                 style={{
-                                    marginBottom: isMobile ? '-800px' : '-1100px'
+                                    bottom: isMobile ? '-62%' : '-58%' // 화면 하단에서의 퍼센트 위치
                                 }}
                             >
                                 {cards.map((card) => (
@@ -245,12 +250,11 @@ export default function CardSelectScene1({ onSceneChange }: SceneProps) {
                 <AnimatePresence>
                     {showCenteredCard && (
                         <motion.div
-                            className="absolute flex items-center justify-center "
+                            className="absolute flex items-center justify-center"
                             style={{
-                                top: '50%',
+                                top: '23%',
                                 width: '100%',
                                 height: '100%',
-                                marginTop: isMobile ? '-150px' : '-200px', // 모바일에서 위치 조정
                                 transform: 'translate(-50%, -50%)',
                                 zIndex: 50
                             }}
@@ -284,7 +288,7 @@ export default function CardSelectScene1({ onSceneChange }: SceneProps) {
                         <motion.div
                             className="absolute left-0 right-0 z-50 flex justify-center gap-18 md:gap-40"
                             style={{
-                                bottom: isMobile ? '32px' : '52px'
+                                bottom: isMobile ? '8%' : '10%' // 화면 하단에서의 퍼센트 위치
                             }}
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
