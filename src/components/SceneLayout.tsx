@@ -147,8 +147,7 @@ export default function SceneLayout({
         <AnimatePresence mode="sync">
             <motion.div
                 key={`${bg}-${effect}`}
-                // ✏️ bg-contain → bg-cover 로 복구
-                className="relative h-screen w-full overflow-hidden bg-cover bg-center"
+                className="relative h-screen w-full overflow-hidden bg-cover bg-top"
                 style={{ backgroundImage: `url(${bg})` }}
                 initial={initial as TargetAndTransition}
                 animate={animate as TargetAndTransition}
