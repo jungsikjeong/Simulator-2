@@ -49,7 +49,7 @@ export default function CardRevealScene({ onSceneChange }: CardRevealSceneProps)
     }, [])
 
     return (
-        <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+        <div className="h-screen w-full flex items-center justify-center relative overflow-hidden">
             {/* 배경 그라데이션 */}
             <div className="absolute inset-0 bg-gradient-to-br from-white via-soft-blue-80 to-blue-100 z-0"></div>
 

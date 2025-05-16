@@ -19,7 +19,7 @@ export default function ReplayScene({ onSceneChange }: SceneProps) {
 
     return (
         <SceneLayout bg="/박정민_5.png" effect="trueBlend">
-            <div className={`relative w-full h-full flex flex-col items-center gap-4 ${choiceOpen ? 'bottom-2' : 'bottom-20'}`}>
+            <div className={`absolute ${choiceOpen ? 'bottom-2' : 'bottom-20'} flex w-full flex-col items-center gap-4`}>
                 <div className="w-full max-w-xl">
                     <motion.div
                         initial={{ opacity: 0 }}
