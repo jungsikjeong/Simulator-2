@@ -23,7 +23,7 @@ export default function StartScene({
         <img
           src="/logo.png"
           alt="Jim Beam"
-          className="w-32 md:w-40 lg:w-42 mb-2"
+          className="w-32"
         />
       </div>
 
@@ -49,7 +49,7 @@ export default function StartScene({
             <img
               src="/title_bright.png"
               alt="짐빔 위대한 마케터"
-              className="w-70 md:w-96 lg:w-100"
+              className="w-70"
             />
           </div>
         </motion.div>

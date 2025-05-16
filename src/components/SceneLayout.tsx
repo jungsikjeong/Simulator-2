@@ -147,7 +147,7 @@ export default function SceneLayout({
         <AnimatePresence mode="sync">
             <motion.div
                 key={`${bg}-${effect}`}
-                className="relative h-screen w-full overflow-hidden bg-cover bg-top"
+                className="relative h-screen w-full overflow-hidden bg-cover bg-center"
                 style={{ backgroundImage: `url(${bg})` }}
                 initial={initial as TargetAndTransition}
                 animate={animate as TargetAndTransition}

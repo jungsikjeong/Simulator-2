@@ -72,7 +72,7 @@ export default function StartScene2({
         <img
           src="/logo.png"
           alt="Jim Beam"
-          className="w-32 md:w-40 lg:w-42 mb-2"
+          className="w-32"
         />
       </div>
 
@@ -122,7 +122,7 @@ export default function StartScene2({
           ]}
           variant="start"
           className='p-5'
-          typingTextClassName='text-sm sm:text-lg leading-relaxed'
+          typingTextClassName='text-sm leading-relaxed'
           onComplete={() => setTypingDone(true)}
           isTouchable={isTouchable}
           setIsTouchable={setIsTouchable}
@@ -136,7 +136,7 @@ export default function StartScene2({
         animate={showInput ? { y: 0, opacity: 1 } : {}}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        <div className="relative w-[90%] max-w-md">
+        <div className="relative w-[90%]">
           <input
             type="text"
             value={playerName}
