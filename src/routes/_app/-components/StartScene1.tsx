@@ -18,14 +18,6 @@ export default function StartScene({
       {/* Scene transition overlay */}
       {/* <div id="scene-transition" className="absolute inset-0 bg-black opacity-0 transition-opacity duration-800 pointer-events-none z-50" /> */}
 
-      {/* 로고고 */}
-      <div className="absolute top-2 w-full flex justify-center">
-        <img
-          src="/logo.png"
-          alt="Jim Beam"
-          className="w-32"
-        />
-      </div>
 
       {/* 타이틀 */}
       <motion.div
