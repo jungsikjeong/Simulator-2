@@ -50,7 +50,7 @@ export default function DialogueBox({
     return (
         <div
             className={cn(
-                'relative mx-auto w-[90%] max-w-xl rounded-xl border',
+                'relative mx-auto w-[80%] max-w-xl rounded-xl border shadow-2xl',
                 dialoguePreset[variant],
                 className
             )}
