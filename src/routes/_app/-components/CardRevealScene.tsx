@@ -19,7 +19,6 @@ export default function CardRevealScene({ onSceneChange }: CardRevealSceneProps)
     const startY = useRef(0)
     const isMobile = useIsMobile()
 
-    // ㅇㅇ
     // 카드 리스트
     const cardList = [
         '/card/card1.png',
@@ -318,7 +317,7 @@ export default function CardRevealScene({ onSceneChange }: CardRevealSceneProps)
 
                 {/* 다음으로 버튼 */}
                 <motion.button
-                    onClick={() => onSceneChange('worry')}
+                    onClick={() => onSceneChange('replay')}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 1.8 }}

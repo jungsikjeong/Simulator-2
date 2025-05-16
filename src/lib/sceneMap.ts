@@ -5,6 +5,7 @@ import WorryScene from '@/routes/_app/-components/WorryScene'
 import CardSelectScene1 from '@/routes/_app/-components/CardSelectScene'
 import CardSelectActionScene from '@/routes/_app/-components/CardSelectActionScene'
 import CardRevealScene from '@/routes/_app/-components/CardRevealScene'
+import ReplayScene from '@/routes/_app/-components/ReplayScene'
 type SceneProps = {
   onSceneChange: (scene: SceneKey) => void
 }
@@ -19,4 +20,5 @@ export const SceneComponentMap: Record<SceneKey, SceneComponent> = {
   cardSelect: CardSelectScene1,
   cardSelectAction: CardSelectActionScene,
   cardReveal: CardRevealScene,
+  replay: ReplayScene,
 }
