@@ -214,14 +214,16 @@ export default function SceneLayout({
                         animate={animate as TargetAndTransition}
                         exit={exit as TargetAndTransition}
                     >
-                        {!hideTitle && (
-                            <img
-                                src="/logo.png"
-                                alt="Greatest Marketer of Jim Beam"
-                                className="absolute top-2 right-4 w-20 z-50"
-                            />
-                        )}
-                        {children}
+                        <div className="relative w-full h-full">
+                            {!hideTitle && (
+                                <img
+                                    src="/logo.png"
+                                    alt="Greatest Marketer of Jim Beam"
+                                    className="absolute top-2 right-4 w-20 z-50"
+                                />
+                            )}
+                            {children}
+                        </div>
                     </motion.div>
                 </AnimatePresence>
             </div>
