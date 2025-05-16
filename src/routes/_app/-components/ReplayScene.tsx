@@ -73,13 +73,14 @@ export default function ReplayScene({ onSceneChange }: SceneProps) {
                         switch (k) {
                             case 'cardSelect':
                                 onSceneChange('cardSelect')
+
+                                break
+                            case 'ending':
+                                onSceneChange('ending')
                                 updateMemberStatus({
                                     id: currentMemberId,
                                     status: 'completed'
                                 })
-                                break
-                            case 'ending':
-                                onSceneChange('ending')
                                 break
                         }
                     }}
