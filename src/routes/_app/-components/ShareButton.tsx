@@ -1,5 +1,3 @@
-'use client'
-
 import { Share2 } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useEffect } from 'react'
@@ -23,6 +21,7 @@ export default function ShareButton({ currentMemberName, selectedCard, title }: 
         }
         return import.meta.env.VITE_APP_URL || window.location.origin // 배포 환경 URL
     }
+    console.log('getBaseUrl:', getBaseUrl)
 
     useEffect(() => {
         if (typeof window !== 'undefined' && window.Kakao) {
