@@ -158,6 +158,10 @@
     background-color: rgba(147, 191, 251, 0.3);
   }
 
+  .bg-soft-blue-ending {
+    background-color: #1f120294;
+  }
+
   .border-soft-blue {
     border-color: #93BFFB;
   }

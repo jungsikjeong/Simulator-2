@@ -6,3 +6,4 @@ export type SceneKey =
   | 'cardSelectAction'
   | 'cardReveal'
   | 'replay'
+  | 'ending'

@@ -1,5 +1,5 @@
 // src/lib/uiPresets.ts
-export type UIPreset = 'light' | 'dark' | 'glass' | 'start' | 'fail' | 'romance'
+export type UIPreset = 'light' | 'dark' | 'glass' | 'start' | 'fail' | 'romance' | 'ending'
 
 /* 대사 박스 */
 export const dialoguePreset: Record<UIPreset, string> = {
@@ -9,6 +9,7 @@ export const dialoguePreset: Record<UIPreset, string> = {
   start: 'bg-soft-blue-80 border-2 border-soft-blue text-white shadow-xl',
   fail: 'bg-white/80 border-none rounded-xl text-gray-700 shadow-md ring-1 ring-gray-200/50',
   romance: ' border-none rounded-xl text-white',
+  ending: 'bg-soft-blue-ending border border-soft-blue/30 rounded-xl text-white shadow-md '
 }
 
 /* 선택지 리스트 */
@@ -64,5 +65,14 @@ export const choicePreset: Record<
   romance: {
     wrapper: '',
     button: '',
+  },
+
+  /* ░░ Ending ░░ */
+  ending: {
+    wrapper: 'bg-white/90 border-none shadow-md',
+    button: [
+      'bg-white/70 hover:bg-white/90 active:bg-white',
+      'text-gray-800 border border-gray-200/50 shadow-sm',
+    ].join(' '),
   },
 }

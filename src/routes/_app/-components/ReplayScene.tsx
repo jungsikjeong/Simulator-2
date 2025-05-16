@@ -72,7 +72,7 @@ export default function ReplayScene({ onSceneChange }: SceneProps) {
                                 onSceneChange('cardSelect')
                                 break
                             case 'ending':
-                                onSceneChange('worry')
+                                onSceneChange('ending')
                                 break
                         }
                     }}

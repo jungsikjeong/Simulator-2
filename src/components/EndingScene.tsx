@@ -1,4 +1,4 @@
-//src/components/SuccessScene.tsx
+//src/components/EndingScene.tsx
 'use client'
 
 import DialogueBox from '@/components/DialogueBox'
@@ -8,7 +8,7 @@ import { motion } from 'framer-motion'
 import type { SoundEffect } from '@/components/SceneLayout'
 
 
-type SuccessSceneProps = {
+type EndingSceneProps = {
     onSceneChange: (scene: SceneKey) => void
     bgImage: string
     chunks: Array<{ content: string; className?: string }>
@@ -21,7 +21,7 @@ type SuccessSceneProps = {
     setIsTouchable?: (isTouchable: boolean) => void
 }
 
-export default function SuccessScene({
+export default function EndingScene({
     onSceneChange,
     bgImage,
     chunks,
@@ -32,7 +32,7 @@ export default function SuccessScene({
     setIsTypingComplete,
     isTouchable = true,
     setIsTouchable,
-}: SuccessSceneProps) {
+}: EndingSceneProps) {
     return (
         <SceneLayout bg={bgImage} effect={effect} soundEffect={soundEffect as SoundEffect}>
             <div className="relative flex h-screen flex-col justify-end overflow-hidden bg-cover bg-center">
@@ -51,8 +51,8 @@ export default function SuccessScene({
                     <DialogueBox
                         chunks={chunks}
                         typingDelay={0.5}
-                        variant="light"
-                        className="mb-20 cursor-pointer px-0 py-6 transition-transform duration-200"
+                        variant="ending"
+                        className="mb-10 cursor-pointer px-0 py-5 transition-transform duration-200"
                         typingTextClassName="text-base sm:text-xl leading-relaxed"
                         isTouchable={isTouchable}
                         setIsTouchable={setIsTouchable}
