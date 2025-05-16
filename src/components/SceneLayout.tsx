@@ -1,3 +1,4 @@
+// src/components/SceneLayout.tsx
 'use client'
 
 import {
@@ -9,7 +10,15 @@ import {
 import type { PropsWithChildren } from 'react'
 import { useEffect } from 'react'
 
-export type TransitionEffect = 'fade' | 'shake' | 'zoom' | 'flash' | 'slide' | 'crossFade' | 'smoothFade' | 'trueBlend'
+export type TransitionEffect =
+    | 'fade'
+    | 'shake'
+    | 'zoom'
+    | 'flash'
+    | 'slide'
+    | 'crossFade'
+    | 'smoothFade'
+    | 'trueBlend'
 export type SoundEffect = 'shalala' | '뾰로롱' | '또로롱' | null
 
 interface SceneLayoutProps extends PropsWithChildren {
@@ -20,7 +29,7 @@ interface SceneLayoutProps extends PropsWithChildren {
     hideTitle?: boolean
 }
 
-/** 효과별 variant 정의 */
+/** 효과별 variant 정의 (기존과 동일) */
 const variantMap: Record<TransitionEffect, Variants> = {
     fade: {
         initial: { opacity: 0 },
@@ -34,17 +43,13 @@ const variantMap: Record<TransitionEffect, Variants> = {
     },
     flash: {
         initial: { opacity: 0 },
-        // as number[] : readonly → 가변 배열로 캐스팅
         animate: { opacity: [0, 1, 0.8, 1] as number[] },
         exit: { opacity: 0 },
     },
     shake: {
         initial: {
             opacity: 0,
-            transition: {
-                duration: 1.5,
-                ease: [0.25, 0.1, 0.25, 1]
-            }
+            transition: { duration: 1.5, ease: [0.25, 0.1, 0.25, 1] },
         },
         animate: {
             opacity: 1,
@@ -54,74 +59,45 @@ const variantMap: Record<TransitionEffect, Variants> = {
         },
         exit: {
             opacity: 0,
-            transition: {
-                duration: 0.2,
-                ease: [0.25, 0.1, 0.25, 1]
-            }
+            transition: { duration: 0.2, ease: [0.25, 0.1, 0.25, 1] },
         },
     },
     slide: {
         initial: { x: '100%', opacity: 0 },
-        animate: {
-            x: 0,
-            opacity: 1,
-            transition: { duration: 0.6, ease: 'easeInOut' }
-        },
-        exit: {
-            x: '-100%',
-            opacity: 0,
-            transition: { duration: 0.6, ease: 'easeInOut' }
-        },
+        animate: { x: 0, opacity: 1, transition: { duration: 0.6, ease: 'easeInOut' } },
+        exit: { x: '-100%', opacity: 0, transition: { duration: 0.6, ease: 'easeInOut' } },
     },
     crossFade: {
         initial: { opacity: 0 },
         animate: {
             opacity: 1,
-            transition: {
-                duration: 1.2,
-                ease: [0.4, 0, 0.2, 1]
-            }
+            transition: { duration: 1.2, ease: [0.4, 0, 0.2, 1] },
         },
         exit: {
             opacity: 0,
-            transition: {
-                duration: 0.2,
-                ease: [0.4, 0, 0.2, 1]
-            }
+            transition: { duration: 0.2, ease: [0.4, 0, 0.2, 1] },
         },
     },
     smoothFade: {
         initial: { opacity: 0 },
         animate: {
             opacity: 1,
-            transition: {
-                duration: 1.5,
-                ease: [0.25, 0.1, 0.25, 1]
-            }
+            transition: { duration: 1.5, ease: [0.25, 0.1, 0.25, 1] },
         },
         exit: {
             opacity: 0,
-            transition: {
-                duration: 0.2,
-                ease: [0.25, 0.1, 0.25, 1]
-            }
+            transition: { duration: 0.2, ease: [0.25, 0.1, 0.25, 1] },
         },
     },
     trueBlend: {
         initial: { opacity: 0 },
         animate: {
             opacity: 1,
-            transition: {
-                duration: 0.8,
-                ease: [0.33, 1, 0.68, 1]
-            }
+            transition: { duration: 0.8, ease: [0.33, 1, 0.68, 1] },
         },
         exit: {
             opacity: 0,
-            transition: {
-                duration: 0.8,
-                ease: [0.32, 0, 0.67, 0]
-            }
+            transition: { duration: 0.8, ease: [0.32, 0, 0.67, 0] },
         },
     },
 }
@@ -134,20 +110,22 @@ export default function SceneLayout({
     soundEffect = null,
     hideTitle = false,
 }: SceneLayoutProps) {
+    // 사운드 재생
     useEffect(() => {
         if (soundEffect) {
             const audio = new Audio(`/sounds/${soundEffect}.mp3`)
-            audio.play().catch(error => console.log('오디오 재생 실패:', error))
+            audio.play().catch(() => { })
         }
     }, [soundEffect])
 
-    /* Esc 스킵 */
+    // Esc 키로 스킵
     useEffect(() => {
-        const h = (e: KeyboardEvent) => e.key === 'Escape' && onSkip?.()
-        window.addEventListener('keydown', h)
-        return () => window.removeEventListener('keydown', h)
+        const handler = (e: KeyboardEvent) => e.key === 'Escape' && onSkip?.()
+        window.addEventListener('keydown', handler)
+        return () => window.removeEventListener('keydown', handler)
     }, [onSkip])
 
+    // 미리 로드할 배경 이미지들
     useEffect(() => {
         const bgUrls = [
             '/박정민_1.png',
@@ -157,10 +135,9 @@ export default function SceneLayout({
             '/박정민_5.png',
             '/card/card_back.png',
         ]
-
         bgUrls.forEach((src) => {
-            const img = new Image();
-            img.src = src;
+            const img = new Image()
+            img.src = src
         })
     }, [])
 
@@ -170,6 +147,7 @@ export default function SceneLayout({
         <AnimatePresence mode="sync">
             <motion.div
                 key={`${bg}-${effect}`}
+                // ✏️ bg-contain → bg-cover 로 복구
                 className="relative h-screen w-full overflow-hidden bg-cover bg-center"
                 style={{ backgroundImage: `url(${bg})` }}
                 initial={initial as TargetAndTransition}
