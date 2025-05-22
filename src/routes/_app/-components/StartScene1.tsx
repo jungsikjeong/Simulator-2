@@ -43,7 +43,7 @@ export default function StartScene({
       preloadImage(src).then(() => {
         setLoaded(prev => {
           const next = prev + 1
-          setProgress(Math.round((next / total) * 100))
+          setProgress(Math.min(Math.round((next / total) * 100), 100))
           return next
         })
       })
