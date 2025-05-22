@@ -44,7 +44,6 @@ export default function CardSelectScene1({ onSceneChange }: SceneProps) {
 
         // Calculate card spacing and positioning with larger cards
         const cardWidth = isMobile ? 60 : 80;  // Increased card width
-        const cardHeight = isMobile ? 90 : 120; // Increased card height
 
         // Calculate negative gap for overlap effect
         const cardOverlap = isMobile ? -25 : -20; // Negative value creates overlap
@@ -218,6 +217,7 @@ export default function CardSelectScene1({ onSceneChange }: SceneProps) {
                         onTouchSceneChange={!showCards ? () => onSceneChange("worry") : undefined}
                         isTypingComplete={isTypingComplete}
                         setIsTypingComplete={setIsTypingComplete}
+                        hideIndicatorWhenNotTouchable={true}
                     />
                 </motion.div>
 
