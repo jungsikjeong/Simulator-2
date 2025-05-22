@@ -53,7 +53,7 @@ export default function EndingScene({
                         typingDelay={0.5}
                         variant="ending"
                         className="mb-10 cursor-pointer px-0 py-5 transition-transform duration-200"
-                        typingTextClassName="text-base sm:text-xl leading-relaxed"
+                        typingTextClassName="leading-relaxed"
                         isTouchable={isTouchable}
                         setIsTouchable={setIsTouchable}
                         onTouchSceneChange={() => onSceneChange(nextScene)}

@@ -47,7 +47,7 @@ export default function SelectActionScene({
                         typingDelay={0.5}
                         variant="fail"
                         className={typingDone ? "mb-5 p-5" : "mb-20 p-5"}
-                        typingTextClassName="text-base sm:text-lg leading-relaxed"
+                        typingTextClassName="leading-relaxed"
                         onComplete={() => setTypingDone(true)}
                         isTouchable={isTouchable}
                         setIsTouchable={setIsTouchable}

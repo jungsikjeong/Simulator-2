@@ -53,7 +53,7 @@ export default function SuccessScene({
                         typingDelay={0.5}
                         variant="light"
                         className="mb-20 cursor-pointer px-0 py-6 transition-transform duration-200"
-                        typingTextClassName="text-base sm:text-xl leading-relaxed"
+                        typingTextClassName="leading-relaxed"
                         isTouchable={isTouchable}
                         setIsTouchable={setIsTouchable}
                         onTouchSceneChange={() => onSceneChange(nextScene)}

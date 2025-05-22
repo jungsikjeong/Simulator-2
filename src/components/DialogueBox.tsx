@@ -4,6 +4,7 @@ import { dialoguePreset, type UIPreset } from '@/lib/uiPresets'
 import { cn } from '@/lib/utils'
 import { AnimatePresence, motion } from 'framer-motion'
 import TypingText from './TypingText'
+import { useIsMobile } from '@/hooks/use-mobile'
 
 interface DialogueBoxProps {
     chunks: { content: string; className?: string }[]
@@ -36,16 +37,13 @@ export default function DialogueBox({
     setIsTypingComplete,
     setIsTouchable,
 }: DialogueBoxProps) {
+    const isMobile = useIsMobile()
     const handleClick = () => {
         if (isTypingComplete && onTouchSceneChange) {
             onTouchSceneChange()
         }
     }
 
-    // 대사의 총 길이를 계산
-    const totalContentLength = chunks.reduce((acc, chunk) => acc + chunk.content.length, 0)
-    // 대사가 10자 이하인 경우 touch 표시를 숨김
-    const shouldShowTouchIndicator = totalContentLength > 15
 
     return (
         <div
@@ -58,7 +56,7 @@ export default function DialogueBox({
         >
             <TypingText
                 text={chunks}
-                className={cn('text-base leading-relaxed', typingTextClassName)}
+                className={cn(`${isMobile ? 'text-xs' : 'text-base'} leading-relaxed`, typingTextClassName)}
                 onComplete={() => {
                     if (onComplete) onComplete()
                     if (setIsTypingComplete) setIsTypingComplete(true)
@@ -70,7 +68,7 @@ export default function DialogueBox({
             />
 
             <AnimatePresence>
-                {isTouchable && shouldShowTouchIndicator && (
+                {isTouchable && (
                     <motion.div
                         className="absolute right-4 bottom-2 flex items-center justify-end text-xs opacity-70"
                         animate={{
