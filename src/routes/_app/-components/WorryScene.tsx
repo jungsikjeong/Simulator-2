@@ -36,6 +36,7 @@ export default function WorryScene({ onSceneChange }: SceneProps) {
             setIsTypingComplete={setIsTypingComplete}
             isTouchable={isTouchable}
             setIsTouchable={setIsTouchable}
+            nextBgList={['/박정민_3.png']}
         >
             <div className="absolute left-1/2 top-1/3 -translate-x-1/2 z-10 flex justify-center w-full pointer-events-none">
                 <motion.img

@@ -21,7 +21,7 @@ export default function ReplayScene({ onSceneChange }: SceneProps) {
     const { mutate: updateMemberStatus } = useUpdateMemberStatus()
 
     return (
-        <SceneLayout bg="/박정민_5.png" effect="trueBlend">
+        <SceneLayout bg="/박정민_5.png" effect="trueBlend" nextBgList={['/박정민_6.png', '/박정민_4.png']}>
             <div className={`absolute ${choiceOpen ? 'bottom-2' : 'bottom-20'} flex w-full flex-col items-center gap-4`}>
                 <div className="w-full max-w-xl">
                     <motion.div

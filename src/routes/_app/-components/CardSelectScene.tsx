@@ -180,7 +180,7 @@ export default function CardSelectScene1({ onSceneChange }: SceneProps) {
     const dialogFinalBottom = isMobile ? '34%' : '37%';
 
     return (
-        <SceneLayout bg="/박정민_3.png" effect="trueBlend">
+        <SceneLayout bg="/박정민_3.png" effect="trueBlend" nextBgList={['/박정민_4.png']}>
             <div className="relative flex h-screen flex-col justify-end overflow-hidden bg-cover bg-center">
                 {/* Dialog box */}
                 <motion.div

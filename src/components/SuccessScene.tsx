@@ -19,6 +19,7 @@ type SuccessSceneProps = {
     setIsTypingComplete?: (isComplete: boolean) => void
     isTouchable?: boolean
     setIsTouchable?: (isTouchable: boolean) => void
+    nextBgList?: string[]
 }
 
 export default function SuccessScene({
@@ -32,10 +33,11 @@ export default function SuccessScene({
     setIsTypingComplete,
     isTouchable = true,
     setIsTouchable,
+    nextBgList = [],
     children,
 }: SuccessSceneProps & { children?: React.ReactNode }) {
     return (
-        <SceneLayout bg={bgImage} effect={effect} soundEffect={soundEffect as SoundEffect}>
+        <SceneLayout bg={bgImage} effect={effect} soundEffect={soundEffect as SoundEffect} nextBgList={nextBgList}>
             <div className="relative flex h-screen flex-col justify-end overflow-hidden bg-cover bg-center">
                 {children}
                 {/* 대화 상자 */}
