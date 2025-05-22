@@ -32,11 +32,12 @@ export default function SuccessScene({
     setIsTypingComplete,
     isTouchable = true,
     setIsTouchable,
-}: SuccessSceneProps) {
+    children,
+}: SuccessSceneProps & { children?: React.ReactNode }) {
     return (
         <SceneLayout bg={bgImage} effect={effect} soundEffect={soundEffect as SoundEffect}>
             <div className="relative flex h-screen flex-col justify-end overflow-hidden bg-cover bg-center">
-
+                {children}
                 {/* 대화 상자 */}
                 <motion.div
                     initial={{ opacity: 0, y: 50, scale: 0.9 }}

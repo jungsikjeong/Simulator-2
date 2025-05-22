@@ -4,6 +4,7 @@ import SuccessScene from '@/components/SuccessScene'
 import type { SceneKey } from '@/modules/scene-key.type'
 import { useState } from 'react'
 import { useGetCurrentMemberName } from '@/service/member/useGetMember'
+import { motion } from 'framer-motion'
 
 type SceneProps = {
     onSceneChange: (scene: SceneKey) => void
@@ -35,6 +36,23 @@ export default function WorryScene({ onSceneChange }: SceneProps) {
             setIsTypingComplete={setIsTypingComplete}
             isTouchable={isTouchable}
             setIsTouchable={setIsTouchable}
-        />
+        >
+            <div className="absolute left-1/2 top-1/3 -translate-x-1/2 z-10 flex justify-center w-full pointer-events-none">
+                <motion.img
+                    src="/worry.png"
+                    alt="고민"
+                    className="w-40 md:w-56"
+                    animate={{
+                        y: [0, -20, 0],
+                        rotate: [0, 2, 0, -2, 0]
+                    }}
+                    transition={{
+                        repeat: Infinity,
+                        duration: 4,
+                        ease: 'easeInOut'
+                    }}
+                />
+            </div>
+        </SuccessScene>
     )
 }
