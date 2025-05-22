@@ -91,6 +91,7 @@ export default function StartScene({
           onComplete={() => setTypingDone(true)}
           isTouchable={isTouchable}
           setIsTouchable={setIsTouchable}
+          hideIndicatorWhenNotTouchable={true}
         />
       </div>
 

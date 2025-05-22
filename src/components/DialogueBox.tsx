@@ -20,6 +20,7 @@ interface DialogueBoxProps {
     isTypingComplete?: boolean
     setIsTypingComplete?: (isComplete: boolean) => void
     setIsTouchable?: (isTouchable: boolean) => void
+    hideIndicatorWhenNotTouchable?: boolean
 }
 
 export default function DialogueBox({
@@ -36,6 +37,7 @@ export default function DialogueBox({
     isTypingComplete,
     setIsTypingComplete,
     setIsTouchable,
+    hideIndicatorWhenNotTouchable = false,
 }: DialogueBoxProps) {
     const isMobile = useIsMobile()
     const handleClick = () => {
@@ -68,17 +70,17 @@ export default function DialogueBox({
             />
 
             <AnimatePresence>
-                {isTouchable && (
+                {(!hideIndicatorWhenNotTouchable || isTouchable) && (
                     <motion.div
                         className="absolute right-4 bottom-2 flex items-center justify-end text-xs opacity-70"
-                        animate={{
+                        animate={isTouchable ? {
                             opacity: [0.7, 0.4, 0.7],
                             transition: {
                                 duration: 1.5,
                                 repeat: Infinity,
                                 ease: 'easeInOut',
                             },
-                        }}
+                        } : { opacity: 0.7 }}
                         initial={{ opacity: 0 }}
                         exit={{ opacity: 0, transition: { duration: 0.5 } }}
                     >
