@@ -1,6 +1,7 @@
 import { Share2 } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useEffect } from 'react'
+import { supabase } from '@/lib/supabase';
 
 declare global {
     interface Window {
@@ -12,9 +13,10 @@ type ShareButtonProps = {
     currentMemberName?: string
     selectedCard: string
     title: string
+    memberId?: string
 }
 
-export default function ShareButton({ currentMemberName, selectedCard, title }: ShareButtonProps) {
+export default function ShareButton({ currentMemberName, selectedCard, title, memberId }: ShareButtonProps) {
     const getBaseUrl = () => {
         if (import.meta.env.DEV) {
             return 'http://localhost:3000'
@@ -85,9 +87,25 @@ export default function ShareButton({ currentMemberName, selectedCard, title }: 
         }
     }
 
+    const handleClick = async () => {
+        shareToKakao()
+        if (memberId) {
+            const { error } = await supabase.from('member_actions_2').insert({
+                member_id: memberId,
+                action_type: 'share',
+            })
+
+            if (error) {
+                console.error('공유 로그 기록 실패:', error)
+                return
+            }
+        }
+    }
+
+
     return (
         <motion.button
-            onClick={shareToKakao}
+            onClick={handleClick}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 2 }}

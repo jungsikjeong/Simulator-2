@@ -18,6 +18,8 @@ interface ChoiceListProps {
   inline?: boolean
   className?: string // wrapper 오버라이드
   textClassName?: string // 버튼 텍스트 클래스 오버라이드
+  onClick?: (memberId: string) => void
+  currentMemberId_2?: string
 }
 
 export default function ChoiceList({
@@ -28,6 +30,8 @@ export default function ChoiceList({
   inline = false,
   className,
   textClassName = 'text-base',
+  onClick,
+  currentMemberId_2
 }: ChoiceListProps) {
   const preset = choicePreset[variant]
 
@@ -64,7 +68,10 @@ export default function ChoiceList({
             {choices.map(c => (
               <motion.li key={c.key} whileTap={{ scale: 0.95 }}>
                 <button
-                  onClick={() => onSelect(c.key)}
+                  onClick={() => {
+                    onSelect(c.key)
+                    onClick?.(currentMemberId_2 as string)
+                  }}
                   className={cn(
                     /* ① 공통 레이아웃 + 애니메이션 */
                     'flex w-full cursor-pointer items-center rounded-full border px-2 py-3 transition-all duration-150 ease-out hover:scale-[1.02] active:scale-100 sm:py-3 sm:pr-6 sm:pl-5',
