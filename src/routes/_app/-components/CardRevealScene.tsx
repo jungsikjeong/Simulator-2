@@ -1,7 +1,7 @@
 'use client'
 
 import type { SceneKey } from '@/modules/scene-key.type'
-import { useGetCurrentMemberName } from '@/service/member/useGetMember'
+import { useGetCurrentMemberName_2 } from '@/service/member/useGetMember'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import ShareButton from './ShareButton'
@@ -11,7 +11,7 @@ type CardRevealSceneProps = {
 }
 
 export default function CardRevealScene({ onSceneChange }: CardRevealSceneProps) {
-    const { data: currentMemberName } = useGetCurrentMemberName()
+    const { data: currentMemberName_2 } = useGetCurrentMemberName_2()
     const [selectedCard, setSelectedCard] = useState<string>('')
 
     // 카드 리스트
@@ -72,7 +72,7 @@ export default function CardRevealScene({ onSceneChange }: CardRevealSceneProps)
                     className="text-center mb-4"
                 >
                     <h2 className="text-xl md:text-2xl font-bold text-soft-blue mb-1">
-                        {currentMemberName || '오리'}!
+                        {currentMemberName_2 || '오리'}!
                     </h2>
                     <p className="text-base md:text-lg text-gray-700 leading-relaxed">
                         너의 고민의<br />
@@ -122,7 +122,7 @@ export default function CardRevealScene({ onSceneChange }: CardRevealSceneProps)
                         <span className="font-medium">다음으로 &gt;</span>
                     </motion.button>
 
-                    <ShareButton currentMemberName={currentMemberName} selectedCard={selectedCard} title='공유하기' />
+                    <ShareButton currentMemberName={currentMemberName_2} selectedCard={selectedCard} title='공유하기' />
                 </div>
             </div>
         </div>

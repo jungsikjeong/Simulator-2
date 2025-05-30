@@ -16,15 +16,15 @@ export const useUpdateMemberStatus = () => {
   });
 };
 
-export const useGetCurrentMemberId = () => {
+export const useGetCurrentMemberId_2 = () => {
   return useSuspenseQuery({
-    ...MemberQueryOptions.getCurrentMemberId(),
+    ...MemberQueryOptions.getCurrentMemberId_2(),
   });
 };
 
-export const useGetCurrentMemberName = () => {
+export const useGetCurrentMemberName_2 = () => {
   return useSuspenseQuery({
-    ...MemberQueryOptions.getCurrentMemberName(),
+    ...MemberQueryOptions.getCurrentMemberName_2(),
   });
 };
 

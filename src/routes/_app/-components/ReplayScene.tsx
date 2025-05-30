@@ -6,8 +6,8 @@ import SceneLayout from '@/components/SceneLayout'
 import type { SceneKey } from '@/modules/scene-key.type'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { useGetCurrentMemberName } from '@/service/member/useGetMember'
-import { useUpdateMemberStatus, useGetCurrentMemberId } from '@/service/member/useGetMember'
+import { useGetCurrentMemberName_2 } from '@/service/member/useGetMember'
+import { useUpdateMemberStatus, useGetCurrentMemberId_2 } from '@/service/member/useGetMember'
 
 type SceneProps = {
     onSceneChange: (scene: SceneKey) => void
@@ -16,8 +16,8 @@ type SceneProps = {
 export default function ReplayScene({ onSceneChange }: SceneProps) {
     const [choiceOpen, setChoiceOpen] = useState(false)
     const [isTouchable, setIsTouchable] = useState(true)
-    const { data: currentMemberName } = useGetCurrentMemberName()
-    const { data: currentMemberId } = useGetCurrentMemberId()
+    const { data: currentMemberName_2 } = useGetCurrentMemberName_2()
+    const { data: currentMemberId_2 } = useGetCurrentMemberId_2()
     const { mutate: updateMemberStatus } = useUpdateMemberStatus()
 
     return (
@@ -32,7 +32,7 @@ export default function ReplayScene({ onSceneChange }: SceneProps) {
                         <DialogueBox
                             chunks={[
                                 {
-                                    content: `[${currentMemberName}]!\n`,
+                                    content: `[${currentMemberName_2}]!\n`,
                                 },
                                 {
                                     content: '해답이 됐어?\n',
@@ -78,7 +78,7 @@ export default function ReplayScene({ onSceneChange }: SceneProps) {
                             case 'ending':
                                 onSceneChange('ending')
                                 updateMemberStatus({
-                                    id: currentMemberId,
+                                    id: currentMemberId_2,
                                     status: 'completed'
                                 })
                                 break

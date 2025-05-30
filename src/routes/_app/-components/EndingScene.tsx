@@ -3,7 +3,7 @@
 import EndingScene from '@/components/EndingScene'
 import type { SceneKey } from '@/modules/scene-key.type'
 import { useState } from 'react'
-import { useGetCurrentMemberName } from '@/service/member/useGetMember'
+import { useGetCurrentMemberName_2 } from '@/service/member/useGetMember'
 
 type SceneProps = {
     onSceneChange: (scene: SceneKey) => void
@@ -12,7 +12,7 @@ type SceneProps = {
 export default function WorryScene({ onSceneChange }: SceneProps) {
     const [isTypingComplete, setIsTypingComplete] = useState(false)
     const [isTouchable, setIsTouchable] = useState(true)
-    const { data: currentMemberName } = useGetCurrentMemberName()
+    const { data: currentMemberName_2 } = useGetCurrentMemberName_2()
 
 
     return (
@@ -21,7 +21,7 @@ export default function WorryScene({ onSceneChange }: SceneProps) {
             bgImage="/박정민_6.png"
             chunks={[
                 {
-                    content: `[${currentMemberName}]!\n`,
+                    content: `[${currentMemberName_2}]!\n`,
                 },
                 {
                     content: '우리의 인생에\n',

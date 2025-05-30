@@ -11,8 +11,8 @@ export const useCreateMember = () => {
   return useMutation<Member, Error, { name: string; id: string }>({
     mutationFn: async ({ name, id }) => {
       const member = await memberService.createMember(name, id);
-      localStorage.setItem('currentMemberId', id);
-      localStorage.setItem('currentMemberName', name);
+      localStorage.setItem('currentMemberId_2', id);
+      localStorage.setItem('currentMemberName_2', name);
       return member;
     },
   });

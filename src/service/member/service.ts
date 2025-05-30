@@ -41,15 +41,15 @@ export default class MemberService extends Service {
     return data;
   }
 
-  async getCurrentMemberId() {
-    const currentId = localStorage.getItem('currentMemberId');
+  async getCurrentMemberId_2() {
+    const currentId = localStorage.getItem('currentMemberId_2');
     if (!currentId) throw new Error('No current member found');
     return currentId;
   }
 
 
-  async getCurrentMemberName() {
-    const currentId = await this.getCurrentMemberId();
+  async getCurrentMemberName_2() {
+    const currentId = await this.getCurrentMemberId_2();
     const { data, error } = await this.supabase
       .from('members_2')
       .select('name')

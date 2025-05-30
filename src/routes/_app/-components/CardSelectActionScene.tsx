@@ -3,7 +3,7 @@
 import DialogueBox from '@/components/DialogueBox'
 import SceneLayout from '@/components/SceneLayout'
 import type { SceneKey } from '@/modules/scene-key.type'
-import { useGetCurrentMemberName } from '@/service/member/useGetMember'
+import { useGetCurrentMemberName_2 } from '@/service/member/useGetMember'
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 
@@ -12,7 +12,7 @@ type SceneProps = {
 }
 
 export default function CardSelectActionScene({ onSceneChange }: SceneProps) {
-    const { data: currentMemberName } = useGetCurrentMemberName()
+    const { data: currentMemberName_2 } = useGetCurrentMemberName_2()
     const [typingDone, setTypingDone] = useState(false)
     const [isTouchable, setIsTouchable] = useState(true)
 
@@ -37,7 +37,7 @@ export default function CardSelectActionScene({ onSceneChange }: SceneProps) {
                 >
                     <DialogueBox
                         chunks={[
-                            { content: `[${currentMemberName}]!\n` },
+                            { content: `[${currentMemberName_2}]!\n` },
                             { content: '넌 이 카드를 뽑았어\n' },
                             { content: '부디 이 카드가 너의 해답이' },
                             { content: '되면 좋겠어!' },

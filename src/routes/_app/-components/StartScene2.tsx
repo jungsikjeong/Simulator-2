@@ -32,12 +32,12 @@ export default function StartScene({
   const handleNameSubmit = async () => {
     if (!playerName.trim()) return
     try {
-      const existingId = localStorage.getItem('currentMemberId_1')
+      const existingId = localStorage.getItem('currentMemberId_2')
 
       if (existingId) {
         // 이미 게임했던 유저면 이름만 업데이트
         await updateMemberName.mutateAsync({ id: existingId, name: playerName })
-        localStorage.setItem('currentMemberName_1', playerName)
+        localStorage.setItem('currentMemberName_2', playerName)
       } else {
         // 새로운 유저면 새로 생성
         const uuid = uuidv4()

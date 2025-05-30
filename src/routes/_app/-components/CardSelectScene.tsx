@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import DialogueBox from '@/components/DialogueBox'
 import SceneLayout from '@/components/SceneLayout'
 import type { SceneKey } from '@/modules/scene-key.type'
-import { useGetCurrentMemberName, useUpdateMemberStatus, useGetCurrentMemberId } from '@/service/member/useGetMember'
+import { useGetCurrentMemberName_2, useUpdateMemberStatus, useGetCurrentMemberId_2 } from '@/service/member/useGetMember'
 import { useIsMobile } from '@/hooks/use-mobile'
 import React from 'react'
 
@@ -21,8 +21,8 @@ export default function CardSelectScene1({ onSceneChange }: SceneProps) {
     const [isTransitioning, setIsTransitioning] = useState(false)
     const [showCenteredCard, setShowCenteredCard] = useState(false)
     const [showButtons, setShowButtons] = useState(false)
-    const { data: currentMemberName } = useGetCurrentMemberName()
-    const { data: currentMemberId } = useGetCurrentMemberId()
+    const { data: currentMemberName_2 } = useGetCurrentMemberName_2()
+    const { data: currentMemberId_2 } = useGetCurrentMemberId_2()
     const updateMemberStatus = useUpdateMemberStatus()
     const isMobile = useIsMobile()
 
@@ -159,9 +159,9 @@ export default function CardSelectScene1({ onSceneChange }: SceneProps) {
         setShowButtons(false);
 
         try {
-            if (currentMemberId) {
+            if (currentMemberId_2) {
                 await updateMemberStatus.mutateAsync({
-                    id: currentMemberId,
+                    id: currentMemberId_2,
                     status: 'in_progress'
                 });
             }
@@ -203,7 +203,7 @@ export default function CardSelectScene1({ onSceneChange }: SceneProps) {
                 >
                     <DialogueBox
                         chunks={[
-                            { content: `[${currentMemberName}]!\n` },
+                            { content: `[${currentMemberName_2}]!\n` },
                             { content: '고민거리를 생각했다면\n' },
                             { content: '이제 이 수 많은 카드중에\n' },
                             { content: '마음에 드는 카드를 골라봐' },

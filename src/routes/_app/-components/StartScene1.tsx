@@ -81,7 +81,7 @@ export default function StartScene({
       <div className="absolute inset-0 cursor-pointer z-10" onClick={() => onSceneChange('start2')} />
       {/* 타이틀 */}
       <motion.div
-        className="absolute bottom-8 md:bottom-14 w-full text-center"
+        className="absolute bottom-26 w-full text-center"
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1, ease: "easeOut" }}
@@ -123,6 +123,15 @@ export default function StartScene({
           <span className="mr-1">▶︎</span> touch
         </motion.div>
       </AnimatePresence>
+
+      {/* 음주 경고 메시지 */}
+      <div className="absolute right-0 bottom-2.5 sm:bottom-0 left-0 mb-8 px-2 py-1 text-center text-xs text-white">
+        <span className="text tracking-tighter">
+          *경고 : 지나친 음주는 뇌졸중, 기억력 손상이나 치매를 유발합니다.
+        </span>
+        <br />
+        임신 중 음주는 기형아 출생 위험을 높입니다
+      </div>
     </SceneLayout>
   )
 }
