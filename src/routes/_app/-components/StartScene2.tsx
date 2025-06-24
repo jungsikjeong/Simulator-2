@@ -85,10 +85,12 @@ export default function StartScene({
 
   return (
     <SceneLayout
-      bg="/박정민_1.png"
+      bg="https://dmfnb4l6be84v.cloudfront.net/simulator2/%EB%B0%95%EC%A0%95%EB%AF%BC_1.webp"
       effect="trueBlend"
       hideTitle={false}
-      nextBgList={["/박정민_2.png"]}
+      nextBgList={[
+        "https://dmfnb4l6be84v.cloudfront.net/simulator2/%EB%B0%95%EC%A0%95%EB%AF%BC_2.webp",
+      ]}
     >
       {/* Background overlay */}
       {/* <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" /> */}
